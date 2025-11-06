@@ -1,0 +1,10 @@
+---
+name: MLflow
+category: Interactive Apps
+subcategory: Servers
+role: batch_connect
+description: |
+  This app will launch the MLflow Tracking UI. You will be able
+  to view your MLflow tracking data through a VNC session.
+
+  [mlflow]: http://mlflow.org

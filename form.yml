@@ -1,0 +1,49 @@
+---
+cluster:
+  - "ascend"
+  - "pitzer"
+  - "cardinal"
+form:
+  - auto_accounts
+  - bc_num_hours
+  - num_cores
+  - pytorch_module
+  - working_dir
+attributes:
+  num_cores:
+    widget: "number_field"
+    label: "Number of cores"
+    value: 1
+    help: |
+      Number of CPU cores. (4 GB per core unless requesting whole
+      node). Minimum and maximum values will depend on cluster and node type.
+    min: 1
+    max: 28
+    step: 1
+  cluster:
+    widget: "select"
+    options:
+      - [
+          "pitzer", "pitzer",
+          data-max-cores: 48
+        ]
+      - [
+          "cardinal", "cardinal",
+          data-max-cores: 96
+        ]
+      - [
+          "ascend", "ascend",
+          data-max-cores: 118
+        ]
+  pytorch_module:
+    widget: 'select'
+    options:
+      - [
+          '2.8.0'
+        ]
+  working_dir:
+    widget: "path_selector"
+    label: "Tracking URI directory"
+    data-target-file-type: both  # Valid values are: files, dirs, or both
+    readonly: false
+    help: "Select your notebook or project directory; defaults to $HOME"

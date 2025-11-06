@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+<%
+notebook_path = ''
+working_dir = Pathname.new(context.working_dir)
+sandbox=''
+if ! working_dir.exist?
+    working_dir = Pathname.new(ENV['HOME'])
+elsif working_dir.file?
+    notebook_path = working_dir
+    working_dir = working_dir.parent
+end
+%>
+
+
+# Clean the environment
+module purge
+
+cd <%= working_dir.to_s %>
+
+module restore
+
+source /etc/os-release
+
+#
+# Start mlflow
+#
+
+# Load the required environment
+module load pytorch/<%= context.pytorch_module %>
+
+
+set -x
+export MLFLOW_STATIC_PREFIX=/node/${host}/${port}
+mlflow server -h 0.0.0.0 -p ${port} --allowed-hosts ${HOSTNAME}.ten.osc.edu:*
